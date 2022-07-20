@@ -26,5 +26,4 @@ function InterviewerList(props) {
   )
 }
 
-
 export default InterviewerList;

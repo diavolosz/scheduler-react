@@ -12,7 +12,6 @@ export function useApplicationData() {
     interviewers: {}
   })
 
-  // console.log(state)
 
   useEffect(() => {
     Promise.all([
@@ -43,7 +42,6 @@ export function useApplicationData() {
     .then(() => {
       let days = [...state.days];
       if (processed) {        
-        console.log("passed")
         days.map(day => {
           if (day.appointments.includes(id) && !Editing) {
             day.spots --;
