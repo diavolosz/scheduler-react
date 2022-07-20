@@ -74,7 +74,7 @@ describe("Application", () => {
 
 
 
-  xit("loads data, books an interview and increases the spots remaining for Monday by 1", async () => {
+  it("loads data, books an interview and increases the spots remaining for Monday by 1", async () => {
     // 1. Render the Application.
     const { container, debug } = render(<Application />);
 
@@ -112,7 +112,7 @@ describe("Application", () => {
   });
 
 
-  xit("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
     // 1. Render the Application.
     const { container, debug } = render(<Application />);
 
@@ -150,7 +150,7 @@ describe("Application", () => {
 
 
 
-  xit("shows the save error when failing to save an appointment", async () => {
+  it("shows the save error when failing to save an appointment", async () => {
     axios.put.mockRejectedValueOnce();
 
     const { container } = render(<Application />);

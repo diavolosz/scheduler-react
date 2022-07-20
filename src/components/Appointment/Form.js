@@ -20,7 +20,6 @@ function Form(props) {
   }
 
   function validate() {
-    // console.log("validate", student, interviewer)
     if (student === "") {
       setError("Student name cannot be blank");
       return;

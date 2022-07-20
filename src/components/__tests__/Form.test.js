@@ -49,7 +49,18 @@ describe("Form", () => {
     expect(onSave).not.toHaveBeenCalled();
   });
 
-
+  it("validates that the interviewer cannot be null", () => {
+    const onSave = jest.fn();
+  
+    const { getByText } = render(
+      <Form interviewers={interviewers} onSave={onSave} student="Lydia Miller-Jones" />
+    );
+  
+    fireEvent.click(getByText("Save"));
+  
+    expect(getByText(/please select an interviewer/i)).toBeInTheDocument();
+    expect(onSave).not.toHaveBeenCalled();
+  });
 
   it("can successfully save after trying to submit an empty student name", () => {
     const onSave = jest.fn();
