@@ -49,7 +49,7 @@ function Appointment(props) {
 
   
   return (
-    <article className="appointment">
+    <article data-testid="appointment" className="appointment">
       <Header time={props.time} />
 
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
@@ -66,8 +66,6 @@ function Appointment(props) {
       {mode === CREATE && (
         <Form 
           interviewers={props.interviewers}
-          interviewer={[]}
-          student={[]}
           onCancel={back}
           onSave={save}
         />
@@ -82,7 +80,7 @@ function Appointment(props) {
 
       {mode === CONFIRM &&
         <Confirm 
-          message = "Are you sure to delete?"
+          message = "Are you sure you would like to delete?"
           onConfirm = {deletes} onCancel = {back}/>
       }
 

@@ -13,7 +13,7 @@ export function getAppointmentsForDay(state, day) {
 
 
 export function getInterviewersForDay(state, day) {
-  if(state.days[0]) {
+  if(state.days) {
     const selectedDay = state.days.filter(Day => Day.name === day)[0];
     if(selectedDay) {
       const Interviewers = selectedDay.interviewers.map((id) => {

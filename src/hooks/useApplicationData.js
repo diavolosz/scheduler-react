@@ -12,7 +12,7 @@ export function useApplicationData() {
     interviewers: {}
   })
 
-  console.log(state)
+  // console.log(state)
 
   useEffect(() => {
     Promise.all([
@@ -21,14 +21,16 @@ export function useApplicationData() {
       axios.get("api/interviewers")
     ]).then((all) => {
       setState(prev => ({ ...prev, days: all[0].data, 
-                                  appointments: all[1].data, 
-                                  interviewers: all[2].data
+                                   appointments: all[1].data, 
+                                   interviewers: all[2].data
       }))
     })
   }, [])
 
 
   const bookInterview = function(id, interview, processed = true) {
+    const Editing = state.appointments[id].interview !== null
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -39,21 +41,21 @@ export function useApplicationData() {
     };
     return axios.put(`/api/appointments/${id}`, { interview })
     .then(() => {
-      setState({
-        ...state,
-        appointments
-      })
-    })
-    .then(() => {
+      let days = [...state.days];
       if (processed) {        
-        let days = state.days;
+        console.log("passed")
         days.map(day => {
-          if (day.appointments.includes(id)) {
+          if (day.appointments.includes(id) && !Editing) {
             day.spots --;
           }
           return day;
         })
       }
+      setState({
+        ...state, 
+        days,
+        appointments
+      })
     })
   }
 
@@ -69,14 +71,8 @@ export function useApplicationData() {
     };
     return axios.delete(`/api/appointments/${id}`, { interview })
     .then(() => {
-      setState({
-        ...state,
-        appointments
-      })
-    })
-    .then(() => {
+      let days = [...state.days]
       if (processed) {        
-        let days = state.days;
         days.map(day => {
           if (day.appointments.includes(id)) {
             day.spots ++;
@@ -84,6 +80,10 @@ export function useApplicationData() {
           return day;
         })
       }
+      setState({
+        ...state,
+        appointments
+      })
     })
   }
 
