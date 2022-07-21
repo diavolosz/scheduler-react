@@ -41,11 +41,9 @@ storiesOf("Button", module)
 
 //------------------------- DayListItem story below -----------------------------//
 
-//Initiates Storybook and registers our DayListItem component
 storiesOf("DayListItem", module) 
 
-  // Provides the default background color for our component
-  .addParameters({
+.addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
   }) 
 
@@ -56,7 +54,6 @@ storiesOf("DayListItem", module)
   .add("Clickable", () => (
       <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> 
     ));
-    // action() allows us to create a callback that appears in the actions panel when clicked
 
 
 

@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "__mocks__/axios";
+import axios from "axios";
 import {
   render,
   cleanup,
@@ -18,7 +18,9 @@ import {
 
 import Application from "components/Application";
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup()
+})
 
 describe("Application", () => {
   it("changes the schedule when a new day is selected", async () => {
@@ -33,9 +35,11 @@ describe("Application", () => {
 
 
 
-  xit("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
+  it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
     const { container, debug } = render(<Application />);
+
     await waitForElement(() => getByText(container, "Archie Cohen"));
+
     const appointments = getAllByTestId(container, "appointment");
     const appointment = appointments[0];
 
@@ -58,21 +62,20 @@ describe("Application", () => {
     );
 
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
+
   });
 
 
 
-
-
-
+  //this test ran by itself will pass. use it.only to confirm
   it("loads data, books an interview and increases the spots remaining for Monday by 1", async () => {
     const { container, debug } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
-    const appointment = getAllByTestId(container, "appointment").find(
-      appointment => queryByText(appointment, "Archie Cohen")
-    );
+    const appointments = getAllByTestId(container, "appointment")
+    const appointment = appointments[1];
+
 
     fireEvent.click(queryByAltText(appointment, "Delete"));
 
@@ -89,10 +92,12 @@ describe("Application", () => {
     const day = getAllByTestId(container, "day").find(day =>
       queryByText(day, "Monday")
     );
-
+  
+    console.log(prettyDOM(day))
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
-
+    
   });
+
 
 
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
@@ -181,4 +186,4 @@ describe("Application", () => {
     ).toBeInTheDocument();
   });
 
-})
+});
