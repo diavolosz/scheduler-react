@@ -15,9 +15,9 @@ export function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
-      axios.get("api/days"),
-      axios.get("api/appointments"),
-      axios.get("api/interviewers")
+      axios.get("/api/days"),
+      axios.get("/api/appointments"),
+      axios.get("/api/interviewers")
     ]).then((all) => {
       setState(prev => ({ ...prev, days: all[0].data, 
                                    appointments: all[1].data, 
@@ -28,7 +28,7 @@ export function useApplicationData() {
 
 
   const bookInterview = function(id, interview, processed = true) {
-    const Editing = state.appointments[id].interview !== null
+    const editing = state.appointments[id].interview !== null
 
     const appointment = {
       ...state.appointments[id],
@@ -42,18 +42,19 @@ export function useApplicationData() {
     .then(() => {
       let days = [...state.days];
       if (processed) {        
-        days.map(day => {
-          if (day.appointments.includes(id) && !Editing) {
-            day.spots --;
+        const modifiedDays = days.map(day => {
+          const updatedDay = {...day}
+          if (updatedDay.appointments.includes(id) && !editing) {
+            updatedDay.spots --;
           }
-          return day;
+          return updatedDay;
+        })
+        setState({
+          ...state, 
+          days: modifiedDays,
+          appointments
         })
       }
-      setState({
-        ...state, 
-        days,
-        appointments
-      })
     })
   }
 
@@ -71,17 +72,19 @@ export function useApplicationData() {
     .then(() => {
       let days = [...state.days]
       if (processed) {        
-        days.map(day => {
-          if (day.appointments.includes(id)) {
-            day.spots ++;
+        const modifiedDays = days.map(day => {
+          const updatedDay = {...day}
+          if (updatedDay.appointments.includes(id)) {
+            updatedDay.spots ++;
           }
-          return day;
+          return updatedDay;
+        })
+        setState({
+          ...state,
+          days: modifiedDays,
+          appointments
         })
       }
-      setState({
-        ...state,
-        appointments
-      })
     })
   }
 

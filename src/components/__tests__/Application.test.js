@@ -18,11 +18,20 @@ import {
 
 import Application from "components/Application";
 
-afterEach(() => {
-  cleanup()
-})
+// afterEach(() => {
+//   cleanup()
+// })
 
 describe("Application", () => {
+
+  afterEach(() => {
+    cleanup()
+  })
+
+  beforeEach(() => {
+    cleanup()
+  })
+
   it("changes the schedule when a new day is selected", async () => {
     const { container } = render(<Application />);
 

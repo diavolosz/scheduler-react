@@ -17,7 +17,7 @@ function Appointment(props) {
   const CREATE = "CREATE";
   const SAVING = "SAVING"
   const CONFIRM = "CONFIRM"
-  const DELETEING = "DELETING"
+  const DELETING = "DELETING"
   const EDIT = "EDIT"
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
@@ -40,8 +40,8 @@ function Appointment(props) {
     }
   }
 
-  function deletes() { 
-    transition(DELETEING, true)
+  const deletes = function() { 
+    transition(DELETING, true)
     props.cancelInterview(props.id)
     .then(()=> {transition(EMPTY)})
     .catch((error) => transition(ERROR_DELETE, true));
@@ -74,7 +74,7 @@ function Appointment(props) {
         <Status message = "Saving" />
       }
 
-      {mode === DELETEING &&
+      {mode === DELETING &&
         <Status message = "Deleting" />
       }
 

@@ -43,9 +43,9 @@ npm run storybook
 - "react-dom": "^16.9.0",
 - "react-scripts": "3.0.0"
 
-- main page
+### main page
   !["main page"](https://github.com/diavolosz/scheduler-react/blob/master/img/main.png)<br />
-- create interview
+### create interview
   !["create interview"](https://github.com/diavolosz/scheduler-react/blob/master/img/create.png)<br />
-- delete interview
+### delete interview
   !["delete interview"](https://github.com/diavolosz/scheduler-react/blob/master/img/delete.png)
