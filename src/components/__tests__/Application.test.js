@@ -76,7 +76,6 @@ describe("Application", () => {
 
 
 
-  //this test ran by itself will pass. use it.only to confirm
   it("loads data, books an interview and increases the spots remaining for Monday by 1", async () => {
     const { container, debug } = render(<Application />);
 
